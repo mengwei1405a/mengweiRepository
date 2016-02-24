@@ -11,5 +11,15 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		init();
+	}
+
+	/**
+	 * 初始化控件对象
+	 */
+	private void init() {
+		// TODO Auto-generated method stub
+		
 	}
 }
