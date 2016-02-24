@@ -31,30 +31,30 @@ public class ContactsActivity extends ListActivity {
 
     Context mContext = null;
 
-    /**»ñÈ¡¿âPhon±í×Ö¶Î**/
+    /**ï¿½ï¿½È¡ï¿½ï¿½Phonï¿½ï¿½ï¿½Ö¶ï¿½**/
     private static final String[] PHONES_PROJECTION = new String[] {
 	    Phone.DISPLAY_NAME, Phone.NUMBER, Photo.PHOTO_ID,Phone.CONTACT_ID };
    
-    /**ÁªÏµÈËÏÔÊ¾Ãû³Æ**/
+    /**ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½**/
     private static final int PHONES_DISPLAY_NAME_INDEX = 0;
     
-    /**µç»°ºÅÂë**/
+    /**ï¿½ç»°ï¿½ï¿½ï¿½ï¿½**/
     private static final int PHONES_NUMBER_INDEX = 1;
     
-    /**Í·ÏñID**/
+    /**Í·ï¿½ï¿½ID**/
     private static final int PHONES_PHOTO_ID_INDEX = 2;
    
-    /**ÁªÏµÈËµÄID**/
+    /**ï¿½ï¿½Ïµï¿½Ëµï¿½ID**/
     private static final int PHONES_CONTACT_ID_INDEX = 3;
     
 
-    /**ÁªÏµÈËÃû³Æ**/
+    /**ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½**/
     private ArrayList<String> mContactsName = new ArrayList<String>();
     
-    /**ÁªÏµÈËÍ·Ïñ**/
+    /**ï¿½ï¿½Ïµï¿½ï¿½Í·ï¿½ï¿½**/
     private ArrayList<String> mContactsNumber = new ArrayList<String>();
 
-    /**ÁªÏµÈËÍ·Ïñ**/
+    /**ï¿½ï¿½Ïµï¿½ï¿½Í·ï¿½ï¿½**/
     private ArrayList<Bitmap> mContactsPhonto = new ArrayList<Bitmap>();
     
     ListView mListView = null;
@@ -64,7 +64,7 @@ public class ContactsActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
 	mContext = this;
 	mListView = this.getListView();
-	/**µÃµ½ÊÖ»úÍ¨Ñ¶Â¼ÁªÏµÈËÐÅÏ¢**/
+	/**ï¿½Ãµï¿½ï¿½Ö»ï¿½Í¨Ñ¶Â¼ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½Ï¢**/
 	getPhoneContacts();
 
 	myAdapter = new MyListAdapter(this);
@@ -76,7 +76,7 @@ public class ContactsActivity extends ListActivity {
 	    @Override
 	    public void onItemClick(AdapterView<?> adapterView, View view,
 		    int position, long id) {
-		//µ÷ÓÃÏµÍ³·½·¨²¦´òµç»°
+		//ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç»°
 		Intent dialIntent = new Intent(Intent.ACTION_CALL, Uri
 			.parse("tel:" + mContactsNumber.get(position)));
 		startActivity(dialIntent);
@@ -86,36 +86,36 @@ public class ContactsActivity extends ListActivity {
 	super.onCreate(savedInstanceState);
     }
 
-    /**µÃµ½ÊÖ»úÍ¨Ñ¶Â¼ÁªÏµÈËÐÅÏ¢**/
+    /**ï¿½Ãµï¿½ï¿½Ö»ï¿½Í¨Ñ¶Â¼ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½Ï¢**/
     private void getPhoneContacts() {
 	ContentResolver resolver = mContext.getContentResolver();
 
-	// »ñÈ¡ÊÖ»úÁªÏµÈË
+	// ï¿½ï¿½È¡ï¿½Ö»ï¿½ï¿½ï¿½Ïµï¿½ï¿½
 	Cursor phoneCursor = resolver.query(Phone.CONTENT_URI,PHONES_PROJECTION, null, null, null);
 
 
 	if (phoneCursor != null) {
 	    while (phoneCursor.moveToNext()) {
 
-		//µÃµ½ÊÖ»úºÅÂë
+		//ï¿½Ãµï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½
 		String phoneNumber = phoneCursor.getString(PHONES_NUMBER_INDEX);
-		//µ±ÊÖ»úºÅÂëÎª¿ÕµÄ»òÕßÎª¿Õ×Ö¶Î Ìø¹ýµ±Ç°Ñ­»·
+		//ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Îªï¿½ÕµÄ»ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ö¶ï¿½ ï¿½ï¿½ï¿½Ç°Ñ­ï¿½ï¿½
 		if (TextUtils.isEmpty(phoneNumber))
 		    continue;
 		
-		//µÃµ½ÁªÏµÈËÃû³Æ
+		//ï¿½Ãµï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½
 		String contactName = phoneCursor.getString(PHONES_DISPLAY_NAME_INDEX);
 		
-		//µÃµ½ÁªÏµÈËID
+		//ï¿½Ãµï¿½ï¿½ï¿½Ïµï¿½ï¿½ID
 		Long contactid = phoneCursor.getLong(PHONES_CONTACT_ID_INDEX);
 
-		//µÃµ½ÁªÏµÈËÍ·ÏñID
+		//ï¿½Ãµï¿½ï¿½ï¿½Ïµï¿½ï¿½Í·ï¿½ï¿½ID
 		Long photoid = phoneCursor.getLong(PHONES_PHOTO_ID_INDEX);
 		
-		//µÃµ½ÁªÏµÈËÍ·ÏñBitamp
+		//ï¿½Ãµï¿½ï¿½ï¿½Ïµï¿½ï¿½Í·ï¿½ï¿½Bitamp
 		Bitmap contactPhoto = null;
 
-		//photoid ´óÓÚ0 ±íÊ¾ÁªÏµÈËÓÐÍ·Ïñ Èç¹ûÃ»ÓÐ¸ø´ËÈËÉèÖÃÍ·ÏñÔò¸øËûÒ»¸öÄ¬ÈÏµÄ
+		//photoid ï¿½ï¿½ï¿½ï¿½0 ï¿½ï¿½Ê¾ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ ï¿½ï¿½ï¿½Ã»ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ä¬ï¿½Ïµï¿½
 		if(photoid > 0 ) {
 		    Uri uri =ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI,contactid);
 		    InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(resolver, uri);
@@ -133,10 +133,10 @@ public class ContactsActivity extends ListActivity {
 	}
     }
     
-    /**µÃµ½ÊÖ»úSIM¿¨ÁªÏµÈËÈËÐÅÏ¢**/
+    /**ï¿½Ãµï¿½ï¿½Ö»ï¿½SIMï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢**/
     private void getSIMContacts() {
 	ContentResolver resolver = mContext.getContentResolver();
-	// »ñÈ¡Sims¿¨ÁªÏµÈË
+	// ï¿½ï¿½È¡Simsï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½
 	Uri uri = Uri.parse("content://icc/adn");
 	Cursor phoneCursor = resolver.query(uri, PHONES_PROJECTION, null, null,
 		null);
@@ -144,16 +144,16 @@ public class ContactsActivity extends ListActivity {
 	if (phoneCursor != null) {
 	    while (phoneCursor.moveToNext()) {
 
-		// µÃµ½ÊÖ»úºÅÂë
+		// ï¿½Ãµï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½
 		String phoneNumber = phoneCursor.getString(PHONES_NUMBER_INDEX);
-		// µ±ÊÖ»úºÅÂëÎª¿ÕµÄ»òÕßÎª¿Õ×Ö¶Î Ìø¹ýµ±Ç°Ñ­»·
+		// ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Îªï¿½ÕµÄ»ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ö¶ï¿½ ï¿½ï¿½ï¿½Ç°Ñ­ï¿½ï¿½
 		if (TextUtils.isEmpty(phoneNumber))
 		    continue;
-		// µÃµ½ÁªÏµÈËÃû³Æ
+		// ï¿½Ãµï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½
 		String contactName = phoneCursor
 			.getString(PHONES_DISPLAY_NAME_INDEX);
 
-		//Sim¿¨ÖÐÃ»ÓÐÁªÏµÈËÍ·Ïñ
+		//Simï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½Í·ï¿½ï¿½
 		
 		mContactsName.add(contactName);
 		mContactsNumber.add(phoneNumber);
@@ -169,7 +169,7 @@ public class ContactsActivity extends ListActivity {
 	}
 
 	public int getCount() {
-	    //ÉèÖÃ»æÖÆÊýÁ¿
+	    //ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    return mContactsName.size();
 	}
 
@@ -197,11 +197,11 @@ public class ContactsActivity extends ListActivity {
 		title = (TextView) convertView.findViewById(R.id.color_title);
 		text = (TextView) convertView.findViewById(R.id.color_text);
 	    }
-	    //»æÖÆÁªÏµÈËÃû³Æ
+	    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½
 	    title.setText(mContactsName.get(position));
-	    //»æÖÆÁªÏµÈËºÅÂë
+	    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½Ëºï¿½ï¿½ï¿½
 	    text.setText(mContactsNumber.get(position));
-	    //»æÖÆÁªÏµÈËÍ·Ïñ
+	    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½Í·ï¿½ï¿½
 	    iamge.setImageBitmap(mContactsPhonto.get(position));
 	    return convertView;
 	}
